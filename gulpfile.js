@@ -43,6 +43,11 @@ let { src, dest } = require('gulp'),
     ttf2svg = require("gulp-ttf-svg"),
     ttf2eot = require("gulp-ttf2eot");
 
+/**
+ * set task to copy plugins
+ * */
+
+
 function browserSync(params) {
     browsersync.init({
         server: {
