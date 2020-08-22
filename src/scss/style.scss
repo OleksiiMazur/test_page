@@ -1,6 +1,7 @@
 @import "fonts";
 
 body {
+    overflow-x: hidden;
     background: black;
     min-height: 100vh;
     width: 100%;
@@ -18,4 +19,8 @@ body {
         height: 100%;
         width: 100%;
     }
+}
+
+.sales {
+    max-width: 100%;
 }

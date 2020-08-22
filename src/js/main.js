@@ -1,10 +1,20 @@
-// import Chartkick from "chartkick"
-// import Chart from "chart.js"
 
-"use strict";
-/*
+var ctx = document.getElementById('sales').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
 
-Chartkick.use(Chart);
+    // The data for our dataset
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+            label: 'My First dataset',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [0, 10, 5, 2, 20, 30, 45]
+        }]
+    },
 
-
-new Chartkick.LineChart("chart-1", {"2017-01-01": 11, "2017-01-02": 6});*/
+    // Configuration options go here
+    options: {}
+});

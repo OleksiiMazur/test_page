@@ -8,6 +8,7 @@ let path = {
         js: distFolder   + "/js/",
         img: distFolder  + "/img/",
         fonts: distFolder  + "/fonts/",
+        plugins: distFolder  + "/plugins/",
     },
     src: {
         html: srcFolder + "/*.html",
@@ -15,6 +16,7 @@ let path = {
         js: srcFolder   + "/js/**/*.js",
         img: srcFolder  + "/img/**/*.{jpg,png,svg,gif,ico,webp}",
         fonts: srcFolder  + "/fonts/**/*.ttf",
+        plugins: srcFolder  + "/plugins/**/*",
     },
     watch: {
         html: srcFolder   + "/**/*.html",
@@ -22,6 +24,7 @@ let path = {
         js: srcFolder     + "/js/**/*.js",
         img: srcFolder    + "/img/**/*.{jpg,png,svg,gif,ico,webp}",
         fonts: srcFolder  + "/fonts/**/*.ttf",
+        plugins: srcFolder  + "/plugins/**/*",
     },
     clean: "./" + distFolder + "/",
 };
@@ -61,6 +64,12 @@ function browserSync(params) {
 function html() {
     return src(path.src.html)
         .pipe(dest(path.build.html))
+        .pipe(browsersync.stream());
+}
+
+function plugins() {
+    return src(path.src.plugins)
+        .pipe(dest(path.build.plugins))
         .pipe(browsersync.stream());
 }
 
@@ -140,15 +149,17 @@ function watchFiles() {
     gulp.watch([path.watch.js], js);
     gulp.watch([path.watch.img], imgs);
     gulp.watch([path.watch.fonts], fonts);
+    gulp.watch([path.watch.plugins], plugins);
 }
 
 function clean(params) {
     return del(path.clean);
 }
 
-let build = gulp.series(clean, gulp.parallel(js, css, html, imgs, fonts));
+let build = gulp.series(clean, gulp.parallel(plugins, js, css, html, imgs, fonts));
 let watch = gulp.parallel(build, watchFiles, browserSync);
 
+exports.plugins = plugins;
 exports.fonts = fonts;
 exports.imgs = imgs;
 exports.html = html;
